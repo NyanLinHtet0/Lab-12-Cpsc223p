@@ -24,5 +24,6 @@ class Client():
     
 Client("jack","pw123")        
 Client("Jill","pw12345")
+Client("Jill","pw12")
 Client.save_all()
 Client.read_all()
