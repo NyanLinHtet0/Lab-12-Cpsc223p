@@ -8,16 +8,13 @@ class Client():
     #class variable dictionary to store accounts in runtime
     
     def __init__(self):
-        account_data = {}
+        self.account_data = {}
     
     def add_account(self, name, pw):
         #check existing account first
         #add if it doesn't exist, add to dictionary
         #if it does exist, error account already exists
-        if name in self.account_data:
-            raise ValueError("Account already exits.")
-        else:
-            self.account_data[name] = pw
+        self.account_data[name] = pw
         
     def delete_account(self,name):
         if(name in self.account_data):
@@ -44,7 +41,6 @@ class Client():
     def read_all(self, filename="account_management.json"):
         with open(filename, "r") as f:
             self.account_data = json.load(f)
-        print(self.account_data)
 
     def login(self, name, pw):
         if name in self.account_data:
@@ -52,14 +48,11 @@ class Client():
                 return True
         else:
             return False
-        
-    def register(self)
-        
-    
+            
+    def print_all(self):
+        print(self.account_data)
+            
 
-    
-Client("jack","pw123")        
-Client("Jill","pw12345")
-Client("Jill","pw12")
-Client.save_all()
-Client.read_all()
+            
+
+
