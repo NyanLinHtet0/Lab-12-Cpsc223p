@@ -14,7 +14,7 @@ class Client():
         #check existing account first
         #add if it doesn't exist, add to dictionary
         #if it does exist, error account already exists
-        self.account_data.append({name:pw})
+        self.account_data[name] = pw
         
     def delete_account(self,name):
         if(name in self.account_data):
@@ -24,6 +24,7 @@ class Client():
         else:
             print(f"Account '{name}' deleted.")
             print(f"Account '{name}' does not exist.")
+
     def change_password(self, name, pw, new_pw):
         #change password if the pw match with old pw
         if pw == self.account_data.get(name):
@@ -41,6 +42,13 @@ class Client():
         with open(filename, "r") as f:
             self.account_data = json.load(f)
         print(self.account_data)
+
+    def login(self, name, pw):
+        if name in self.account_data:
+            if self.account_data[name] == pw:
+                return True
+        else:
+            return False
             
     
 Client("jack","pw123")        
