@@ -42,18 +42,13 @@ while(choice!= 3):
     if(choice == 1):
         name = input("Username: ")
         pw = input("Password: ")
-        if(acc_manager.login(name,pw) == True):#login comparison
+        if acc_manager.login(name,pw) == True:#login comparison
             logged_in_menu = menu(message_menu)
             while(logged_in_menu != 3):
                 destination = input("who do you want to message?: ")
-                #check if user exists
-                #if it does exists
                 message = input("what is the message you would like to send: ")
-                #send message Y or N
-                confirmation = input("y/n")
-                if confirmation == 'y':
-                    acc_manager.message(name, message, destination)
-                    #once y is pressed, we save to message.json/txt
+                if(acc_manager.sendmessage(name,destination,message) == False):
+                    raise Exception("User you are trying to send does not exist")
                 logged_in_menu = menu(message_menu)
         else:
             print("Wrong login information")
