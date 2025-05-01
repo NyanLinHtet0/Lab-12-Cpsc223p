@@ -18,7 +18,10 @@ class Client():
     
     def change_password(self, name, pw, new_pw):
         #change password if the pw match with old pw
-
+        if pw == self.account_data.get(name):
+            self.account_data[name] = new_pw
+        else:
+            raise ValueError("Incorrect Password")
         
     #class method to save all account names
     def save_all(filename="account_management.json"):
