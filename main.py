@@ -51,7 +51,9 @@ while(choice!= 3):
                 message = input("what is the message you would like to send: ")
                 #send message Y or N
                 confirmation = input("y/n")
-                #once y is pressed, we save to message.json/txt
+                if confirmation == 'y':
+                    acc_manager.message(name, message, destination)
+                    #once y is pressed, we save to message.json/txt
                 logged_in_menu = menu(message_menu)
         else:
             print("Wrong login information")
