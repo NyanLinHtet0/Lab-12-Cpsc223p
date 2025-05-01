@@ -14,7 +14,10 @@ class Client():
         #check existing account first
         #add if it doesn't exist, add to dictionary
         #if it does exist, error account already exists
-        self.account_data[name] = pw
+        if name in self.account_data:
+            raise ValueError("Account already exits.")
+        else:
+            self.account_data[name] = pw
         
     def delete_account(self,name):
         if(name in self.account_data):
@@ -49,7 +52,11 @@ class Client():
                 return True
         else:
             return False
-            
+        
+    def register(self)
+        
+    
+
     
 Client("jack","pw123")        
 Client("Jill","pw12345")
