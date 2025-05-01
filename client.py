@@ -15,7 +15,15 @@ class Client():
         #add if it doesn't exist, add to dictionary
         #if it does exist, error account already exists
         self.account_data.append({name:pw})
-    
+        
+    def delete_account(self,name):
+        if(name in self.account_data):
+            pw = input("Enter password to delete account: ")
+            if pw == self.account_data[name]:
+                del self.account_data[name]
+        else:
+            print(f"Account '{name}' deleted.")
+            print(f"Account '{name}' does not exist.")
     def change_password(self, name, pw, new_pw):
         #change password if the pw match with old pw
         if pw == self.account_data.get(name):
@@ -29,10 +37,10 @@ class Client():
             json.dump(Client.account_data, f, indent=4)
     
     #class method to read all accounts from json to runtime
-    def read_all(filename="account_management.json"):
+    def read_all(self, filename="account_management.json"):
         with open(filename, "r") as f:
-            Client.account_data = json.load(f)
-        print(Client.account_data)  
+            self.account_data = json.load(f)
+        print(self.account_data)
             
     
 Client("jack","pw123")        
