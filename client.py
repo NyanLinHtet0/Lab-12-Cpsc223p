@@ -6,11 +6,19 @@ import json
 
 class Client():
     #class variable dictionary to store accounts in runtime
-    account_data = {}
-    def __init__(self, name, password):
-        self.__name = name
-        self.__password = password
-        Client.account_data[name]=password
+    
+    def __init__(self):
+        account_data = {}
+    
+    def add_account(self, name, pw):
+        #check existing account first
+        #add if it doesn't exist, add to dictionary
+        #if it does exist, error account already exists
+        self.account_data.append({name:pw})
+    
+    def change_password(self, name, pw, new_pw):
+        #change password if the pw match with old pw
+
         
     #class method to save all account names
     def save_all(filename="account_management.json"):
