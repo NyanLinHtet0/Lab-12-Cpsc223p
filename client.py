@@ -48,7 +48,28 @@ class Client():
                 return True
         else:
             return False
+        
+    def send_message(self, name, source, destination):
+        if destination in self.account_data:
+            message_data ={
+                "from": source,
+                "to": destination,
+                "message": f"Message from {name}"
+            }
+            #Load existing messages or intialize empty list
+            try:
+                with open("message.json", "r") as f:
+                    messages = json.load(f)
+            except (FileNotFoundError, json.JSONDecodeError):
+                messages = []
+            # Append new message
+            messages.append(message_data)
             
+            #Write updated list back to file
+            with open("message.json", "w") as f:
+                json.dump(messages, f, indent=4)
+        else:
+            raise KeyError(f"Destination '{destination}' does not exist.")
     def print_all(self):
         print(self.account_data)
             
