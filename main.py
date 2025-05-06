@@ -32,8 +32,7 @@ while(choice!= 4):
                 destination = input("who do you want to message?: ")
                 message = input("what is the message you would like to send: ")
                 acc_manager.print_all()
-                if(acc_manager.send_message(name,message,destination) == False):
-                    raise Exception("User you are trying to send does not exist")
+                acc_manager.send_message(name,message,destination)
                 logged_in_menu = menu(message_menu)
         else:
             print("Wrong login information")
