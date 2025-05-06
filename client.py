@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 #TODOS: add error checking
 #TODOS: check duplicate entries and reject them
@@ -57,12 +58,15 @@ class Client():
         else:
             return False
         
-    def send_message(self, name, source, destination):
+    def send_message(self, name, message, destination):
         if destination in self.account_data:
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
             message_data ={
-                "from": source,
+                "from": name,
                 "to": destination,
-                "message": f"Message from {name}"
+                "message": message,
+                "time": timestamp
             }
             #Load existing messages or intialize empty list
             try:
@@ -76,8 +80,11 @@ class Client():
             #Write updated list back to file
             with open("message_log.txt", "w") as f:
                 json.dump(messages, f, indent=4)
+
+            print("Message sent.")
         else:
             raise KeyError(f"Destination '{destination}' does not exist.")
+        
     def print_all(self):
         print(self.account_data)
             
