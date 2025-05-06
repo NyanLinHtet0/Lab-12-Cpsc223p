@@ -12,7 +12,7 @@ acc_manager = Client()
 # acc_manager.print_all()
 
 #menu constants    
-main_menu = ["Login", "Register"]
+main_menu = ["Login", "Register", "Delete Account"]
 message_menu = ["Message", "logout"]
 
 #Read existing data to load last state
@@ -38,11 +38,18 @@ while(choice!= 3):
         else:
             print("Wrong login information")
             
-    #Register
-    if(choice == 2):
+    #Register Account
+    elif(choice == 2):
         name = input("Username: ")
         pw = input("Password:")
-        acc_manager.add_account()
+        acc_manager.add_account(name,pw)
+    
+    #Delete Account
+    elif(choice == 3):
+        name = input("Username: ")
+        pw = input("Password:")
+        acc_manager.delete_account(name,pw)
+    
 
 
 
