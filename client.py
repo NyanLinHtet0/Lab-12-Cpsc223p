@@ -58,7 +58,7 @@ class Client():
             }
             #Load existing messages or intialize empty list
             try:
-                with open("message.json", "r") as f:
+                with open("message_log.txt", "r") as f:
                     messages = json.load(f)
             except (FileNotFoundError, json.JSONDecodeError):
                 messages = []
@@ -66,7 +66,7 @@ class Client():
             messages.append(message_data)
             
             #Write updated list back to file
-            with open("message.json", "w") as f:
+            with open("message_log.txt", "w") as f:
                 json.dump(messages, f, indent=4)
         else:
             raise KeyError(f"Destination '{destination}' does not exist.")
