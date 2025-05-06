@@ -69,7 +69,8 @@ class Client():
             with open("message.json", "w") as f:
                 json.dump(messages, f, indent=4)
         else:
-            raise KeyError(f"Destination '{destination}' does not exist.")
+            return False
+        
     def print_all(self):
         print(self.account_data)
             

@@ -47,7 +47,8 @@ while(choice!= 3):
             while(logged_in_menu != 3):
                 destination = input("who do you want to message?: ")
                 message = input("what is the message you would like to send: ")
-                if(acc_manager.send_message(name,destination,message) == False):
+                acc_manager.print_all()
+                if(acc_manager.send_message(name,message,destination) == False):
                     raise Exception("User you are trying to send does not exist")
                 logged_in_menu = menu(message_menu)
         else:
