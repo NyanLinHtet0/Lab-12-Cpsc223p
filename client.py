@@ -31,6 +31,14 @@ class Client():
             self.account_data[name] = new_pw
         else:
             raise ValueError("Incorrect Password")
+    
+    def change_username(self, name, pw, new_name):
+        if pw == self.account_data.get(name):
+            if new_name in self.account_data:
+                raise ValueError("Username already taken")
+            self.account_data[new_name] = self.account_data.pop(name)
+        else: 
+            raise ValueError("Incorrect Password")
         
     #class method to save all account names
     def save_all(filename="account_management.json"):
@@ -70,6 +78,7 @@ class Client():
                 json.dump(messages, f, indent=4)
         else:
             raise KeyError(f"Destination '{destination}' does not exist.")
+        
     def print_all(self):
         print(self.account_data)
             
