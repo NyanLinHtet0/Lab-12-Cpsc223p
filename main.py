@@ -27,13 +27,15 @@ while(choice!= 4):
         name = input("Username: ")
         pw = input("Password: ")
         if acc_manager.login(name,pw) == True:#login comparison
-            logged_in_menu = menu(message_menu)
-            while(logged_in_menu != 3):
-                destination = input("who do you want to message?: ")
-                message = input("what is the message you would like to send: ")
-                acc_manager.print_all()
-                acc_manager.send_message(name,message,destination)
-                logged_in_menu = menu(message_menu)
+            logged_in_menu = menu(message_menu,False)
+            while(logged_in_menu != 2):
+                #send message function
+                if(logged_in_menu == 1):
+                    destination = input("who do you want to message?: ")
+                    message = input("what is the message you would like to send: ")
+                    acc_manager.print_all()
+                    acc_manager.send_message(name,message,destination)
+                logged_in_menu = menu(message_menu,False)
         else:
             print("Wrong login information")
             

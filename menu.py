@@ -1,6 +1,6 @@
 #this function is a menu function
-def menu(lst):
-    if 'Exit' in lst:
+def menu(lst,exit=True):
+    if exit == False:
         pass
     else:
         lst.append('Exit')
