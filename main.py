@@ -21,7 +21,7 @@ acc_manager.read_all()
 #start the menu
 choice = menu(main_menu)
 
-while(choice!= 3):
+while(choice!= 4):
     #Login
     if(choice == 1):
         name = input("Username: ")
