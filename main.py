@@ -3,7 +3,7 @@ print("hello world")
 # Aijahlin
 
 from client import Client
-
+from menu import menu
 acc_manager = Client()
 # acc_manager.add_account("jack","pw123")
 # acc_manager.add_account("jill","pw123")
@@ -11,34 +11,18 @@ acc_manager = Client()
 # acc_manager.delete_account("jill")
 # acc_manager.print_all()
 
-#this function is a menu function
-def menu(lst):
-    if 'Exit' in lst:
-        pass
-    else:
-        lst.append('Exit')
-    print()
-    i = 1
-    for item in lst:
-        print(str(i) + '. ' + item)
-        i += 1
-    while True:
-        try:
-            choice = int(input('Input: '))
-            if 1 <= choice <= len(lst):
-                print()
-                return choice
-            else:
-                print('Invalid choice. Please enter a number between 1 and', len(lst))
-        except ValueError:
-            print('Invalid input. Please enter a valid number.')
-    
-main_menu = ["Login", "Register"]
+#menu constants    
+main_menu = ["Login", "Register", "Delete Account"]
 message_menu = ["Message", "logout"]
-choice = menu(main_menu)
+
+#Read existing data to load last state
 acc_manager.read_all()
 
+#start the menu
+choice = menu(main_menu)
+
 while(choice!= 3):
+    #Login
     if(choice == 1):
         name = input("Username: ")
         pw = input("Password: ")
@@ -47,11 +31,25 @@ while(choice!= 3):
             while(logged_in_menu != 3):
                 destination = input("who do you want to message?: ")
                 message = input("what is the message you would like to send: ")
-                if(acc_manager.send_message(name,destination,message) == False):
+                acc_manager.print_all()
+                if(acc_manager.send_message(name,message,destination) == False):
                     raise Exception("User you are trying to send does not exist")
                 logged_in_menu = menu(message_menu)
         else:
             print("Wrong login information")
+            
+    #Register Account
+    elif(choice == 2):
+        name = input("Username: ")
+        pw = input("Password:")
+        acc_manager.add_account(name,pw)
+    
+    #Delete Account
+    elif(choice == 3):
+        name = input("Username: ")
+        pw = input("Password:")
+        acc_manager.delete_account(name,pw)
+    
 
 
 
