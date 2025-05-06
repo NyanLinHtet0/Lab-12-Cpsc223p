@@ -16,7 +16,7 @@ class Client():
         #add if it doesn't exist, add to dictionary
         #if it does exist, error account already exists
         self.account_data[name] = pw
-        
+
     def delete_account(self,name):
         if(name in self.account_data):
             pw = input("Enter password to delete account: ")
@@ -84,7 +84,39 @@ class Client():
             print("Message sent.")
         else:
             raise KeyError(f"Destination '{destination}' does not exist.")
+    
+    def view_inbox(self, name):
+        inbox_message = []
+        try:
+            with open("message_log.txt", "r") as f:
+                messages = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            messages = []
         
+        unique_accounts = set()
+        if(len(messages)>0):
+            for message in messages:
+                if message["from"] == name :
+                    inbox_message.append(message)
+                    unique_accounts.add(message["to"])
+                if message["to"] == name:
+                    inbox_message.append(message)
+                    unique_accounts.add(message["from"])
+        message_dict = dict.fromkeys(unique_accounts)
+        message_dict = { acct: [] for acct in unique_accounts }
+
+    
+        for acc in unique_accounts:
+                for message in inbox_message:
+                    if message["from"] == acc:
+                        message_dict[acc].append(message)
+                    if message["to"] == acc:
+                        message_dict[acc].append(message)
+        return message_dict
+        
+                    
+            
+    
     def print_all(self):
         print(self.account_data)
             
