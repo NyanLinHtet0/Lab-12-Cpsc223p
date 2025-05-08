@@ -83,8 +83,8 @@ class Client():
 
             print("Message sent.")
         else:
-            raise KeyError(f"Destination '{destination}' does not exist.")
-    
+            print(f"Destination '{destination}' does not exist.")
+            
     def view_inbox(self, name):
         inbox_message = []
         try:

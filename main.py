@@ -1,5 +1,5 @@
-print("hello world")
-print("hello world")
+print("Hello World!")
+# print("hello world")
 # Aijahlin
 
 from client import Client
@@ -13,7 +13,7 @@ acc_manager = Client()
 
 #menu constants    
 main_menu = ["Login", "Register", "Delete Account"]
-message_menu = ["Message", "View Inbox","logout"]
+message_menu = ["Message", "View Inbox","Logout"]
 
 #Read existing data to load last state
 acc_manager.read_all()
@@ -32,10 +32,14 @@ while(choice!= 4):
             while(logged_in_menu != 3):
                 #send message function
                 if(logged_in_menu == 1):
-                    destination = input("who do you want to message?: ")
-                    message = input("what is the message you would like to send: ")
-                    acc_manager.print_all()
-                    acc_manager.send_message(name,message,destination)
+                    while True:
+                        destination = input("Who do you want to message?: ")
+                        if destination in acc_manager.account_data:
+                            message = input("What is the message you would like to send?: ")
+                            acc_manager.send_message(name, message, destination)
+                            break  # Exit retry loop after sending
+                        else:
+                            print(f"Destination '{destination}' does not exist. Please try again.")
                 elif(logged_in_menu == 2):
                     messages = acc_manager.view_inbox(name)
                     for person in messages:
