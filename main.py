@@ -14,6 +14,9 @@ acc_manager = Client()
 #menu constants    
 main_menu = ["Login", "Register", "Delete Account"]
 message_menu = ["Message", "View Inbox","Logout"]
+TOTAL_WIDTH   = 80
+RIGHT_MARGIN  = 15
+CONTENT_WIDTH = TOTAL_WIDTH - RIGHT_MARGIN
 
 #Read existing data to load last state
 acc_manager.read_all()
@@ -42,12 +45,18 @@ while(choice!= 4):
                             print(f"Destination '{destination}' does not exist. Please try again.")
                 elif(logged_in_menu == 2):
                     messages = acc_manager.view_inbox(name)
+                    print(f"messages on the right are sent messages\nmessages on the left are received messages")
                     for person in messages:
-                        print(person)
+                        print(f"----------------{person}'s Chat------------------------------")
                         for message in messages[person]:
                             # print(message)
-                            print(f'  {message['message']}({message['time']})')
-                        print()     
+                            text = f"{message['message']}({message['time']})"
+                            if message['from'] == person:
+                                # right‑align into CONTENT_WIDTH columns
+                                print(f"{text:>{CONTENT_WIDTH}}")
+                            else:
+                                # left‑align into CONTENT_WIDTH columns
+                                print(f"{text:<{CONTENT_WIDTH}}") 
                 logged_in_menu = menu(message_menu,False)
         else:
             print("Wrong login information")

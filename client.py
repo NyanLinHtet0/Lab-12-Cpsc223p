@@ -104,10 +104,11 @@ class Client():
                     unique_accounts.add(message["from"])
         message_dict = dict.fromkeys(unique_accounts)
         message_dict = { acct: [] for acct in unique_accounts }
+
         for acc in unique_accounts:
                 for message in inbox_message:
-                    # if message["from"] == acc:
-                    #     message_dict[acc].append(message)
+                    if message["from"] == acc:
+                        message_dict[acc].append(message)
                     if message["to"] == acc:
                         message_dict[acc].append(message)
         return message_dict
