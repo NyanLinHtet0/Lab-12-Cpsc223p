@@ -12,18 +12,24 @@ class Client():
         self.account_data = {}
     
     def add_account(self, name, pw):
-        #check existing account first
-        #add if it doesn't exist, add to dictionary
-        #if it does exist, error account already exists
+        """
+        Add a new account if it doesn't already exist.
+
+        Raises:
+            ValueError: If an account with the given name already exists.
+        """
+        if name in self.account_data:
+            return False
         self.account_data[name] = pw
+        return True
 
     def delete_account(self,name):
         if(name in self.account_data):
             pw = input("Enter password to delete account: ")
             if pw == self.account_data[name]:
                 del self.account_data[name]
+                print(f"Account '{name}' deleted.")
         else:
-            print(f"Account '{name}' deleted.")
             print(f"Account '{name}' does not exist.")
 
     def change_password(self, name, pw, new_pw):

@@ -50,13 +50,15 @@ while(choice!= 4):
                         print(f"----------------{person}'s Chat------------------------------")
                         for message in messages[person]:
                             # print(message)
-                            text = f"{message['message']}({message['time']})"
                             if message['from'] == person:
                                 # right‑align into CONTENT_WIDTH columns
-                                print(f"{text:>{CONTENT_WIDTH}}")
+                                text = f"{message['message']}({message['time']})"
+                                print(f"{text:<{CONTENT_WIDTH}}")
                             else:
                                 # left‑align into CONTENT_WIDTH columns
-                                print(f"{text:<{CONTENT_WIDTH}}") 
+                                text = f"({message['time']}){message['message']}"
+                                print(f"{text:>{CONTENT_WIDTH}}") 
+
                 logged_in_menu = menu(message_menu,False)
         else:
             print("Wrong login information")
@@ -66,13 +68,13 @@ while(choice!= 4):
     elif(choice == 2):
         name = input("Username: ")
         pw = input("Password:")
-        acc_manager.add_account(name,pw)
-    
+        if (acc_manager.add_account(name,pw)) == False:
+            print(f"Account '{name}' already exists. TRY AGAIN with different username!\n")
+
     #Delete Account
     elif(choice == 3):
         name = input("Username: ")
-        pw = input("Password:")
-        acc_manager.delete_account(name,pw)
+        acc_manager.delete_account(name)
 
     choice = menu(main_menu,False)
     
