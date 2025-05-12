@@ -36,21 +36,22 @@ class Client():
         #change password if the pw match with old pw
         if pw == self.account_data.get(name):
             self.account_data[name] = new_pw
+            print("Password change successfully")
         else:
             raise ValueError("Incorrect Password")
     
     def change_username(self, name, pw, new_name):
         if pw == self.account_data.get(name):
             if new_name in self.account_data:
-                raise ValueError("Username already taken")
+                print("Username already taken")
             self.account_data[new_name] = self.account_data.pop(name)
         else: 
-            raise ValueError("Incorrect Password")
+            print("Incorrect Password")
         
     #class method to save all account names
-    def save_all(filename="account_management.json"):
+    def save_all(self,filename="account_management.json"):
         with open(filename, "w") as f:
-            json.dump(Client.account_data, f, indent=4)
+            json.dump(self.account_data, f, indent=4)
     
     #class method to read all accounts from json to runtime
     def read_all(self, filename="account_management.json"):

@@ -1,7 +1,3 @@
-print("Hello World!")
-# print("hello world")
-# Aijahlin
-
 from client import Client
 from menu import menu
 acc_manager = Client()
@@ -13,7 +9,7 @@ acc_manager = Client()
 
 #menu constants    
 main_menu = ["Login", "Register", "Delete Account"]
-message_menu = ["Message", "View Inbox","Logout"]
+message_menu = ["Message", "View Inbox","Change Password","Logout"]
 TOTAL_WIDTH   = 80
 RIGHT_MARGIN  = 15
 CONTENT_WIDTH = TOTAL_WIDTH - RIGHT_MARGIN
@@ -32,7 +28,7 @@ while(choice!= 4):
         logged_status = acc_manager.login(name,pw)
         if  logged_status == True:#login comparison
             logged_in_menu = menu(message_menu,False)
-            while(logged_in_menu != 3):
+            while(logged_in_menu != 4):
                 #send message function
                 if(logged_in_menu == 1):
                     while True:
@@ -58,6 +54,10 @@ while(choice!= 4):
                                 # left‑align into CONTENT_WIDTH columns
                                 text = f"({message['time']}){message['message']}"
                                 print(f"{text:>{CONTENT_WIDTH}}") 
+                elif(logged_in_menu == 3):
+                    pw = input("Enter current password: ")
+                    new_pw = input("Enter new password:")
+                    acc_manager.change_password(name,pw,new_pw)
 
                 logged_in_menu = menu(message_menu,False)
         else:
@@ -77,7 +77,7 @@ while(choice!= 4):
         acc_manager.delete_account(name)
 
     choice = menu(main_menu,False)
-    
+acc_manager.save_all()
     
 
 
